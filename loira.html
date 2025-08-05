@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quer Namorar Comigo?</title>
+  <style>
+    body {
+      background-color: #ffe6ec;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #b30059;
+      margin-bottom: 20px;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      max-width: 90%;
+      word-wrap: break-word;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    #sim {
+      background-color: #ff3366;
+      color: white;
+    }
+
+    #nao {
+      background-color: #cccccc;
+      color: black;
+    }
+
+    .sim-extra {
+      position: absolute;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      background-color: #ff3366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mensagemFinal {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #b30059;
+      max-width: 90%;
+    }
+
+    .imagem-final {
+      max-width: 300px;
+      margin-top: 40px;
+    }
+    
+    img {
+      max-width: 90%;
+      height: auto;
+      margin-top: 20px;
+    }
+    @keyframes cair {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <img src="aceita.jpg" style="max-width: 300px; margin-top: 20px;">
+  
+  <h1>Aceita ser minha loira?</h1>
+
+  <div class="botoes">
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const botaoNao = document.getElementById("nao");
+    const botaoSim = document.getElementById("sim");
+
+    botaoNao.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const novoBotao = document.createElement("button");
+      novoBotao.innerText = "Sim";
+      novoBotao.classList.add("sim-extra");
+
+      const largura = window.innerWidth - 120;
+      const altura = window.innerHeight - 70;
+      const posX = Math.random() * largura;
+      const posY = Math.random() * altura;
+      novoBotao.style.left = posX + "px";
+      novoBotao.style.top = posY + "px";
+
+      novoBotao.addEventListener("click", mostrarMensagemFinal);
+
+      document.body.appendChild(novoBotao);
+    });
+
+    botaoSim.addEventListener("click", mostrarMensagemFinal);
+
+    function mostrarMensagemFinal() {
+      // Limpa a tela inteira
+      document.body.innerHTML = '';
+
+      // Cria imagem
+      const img = document.createElement("img");
+      img.src = "aceitou.jpg";
+      img.classList.add("imagem-final");
+
+      // Cria mensagem
+      const msg = document.createElement("p");
+      msg.classList.add("mensagemFinal");
+      msg.innerHTML = `Você agora é oficialmente minha loira. Esse contrato só poderá ser finalizado em 80 anos,<br>
+      onde a multa por quebra de contrato é no valor de U$1B!!!!!<br>Te amo meu xuxuzinho ❤️`;
+
+      // Música online Careless Whisper instrumental
+      const audio = document.createElement("audio");
+      audio.setAttribute("autoplay", "true");
+      audio.setAttribute("loop", "true");
+      audio.setAttribute("playsinline", "true");
+
+      const source = document.createElement("source");
+      source.src = "https://cdn.pixabay.com/download/audio/2022/03/04/audio_340d504d20.mp3?filename=careless-whisper-13592.mp3";
+      source.type = "audio/mpeg";
+
+      audio.appendChild(source);
+      document.body.appendChild(audio);
+
+      audio.volume = 0.4;
+      audio.play().catch(e => console.log("Erro ao tocar música:", e));
+
+      document.body.appendChild(img);
+      document.body.appendChild(msg);
+      
+      iniciarCoracoes();
+      function iniciarCoracoes() {
+        setInterval(() => {
+        const coracao = document.createElement("div");
+        coracao.innerHTML = "❤️";
+        coracao.style.position = "fixed";
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.top = "-30px";
+        coracao.style.fontSize = Math.random() * 20 + 20 + "px";
+        coracao.style.opacity = 0.8;
+        coracao.style.animation = "cair 3s linear forwards";
+        document.body.appendChild(coracao);
+
+    // Remove o coração após a animação
+        setTimeout(() => {
+          coracao.remove();
+          }, 3000);
+        }, 300); // Um coração a cada 0.3s
+      }
+    }
+  </script>
+</body>
+</html>
+
+
